@@ -1,0 +1,44 @@
+components:
+  schemas:
+    Error:
+      type: object
+      required:
+        - success
+        - message
+      properties:
+        success:
+          type: boolean
+        message:
+          type: string
+        stack:
+          type: string
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+        role:
+          type: string
+        email:
+          type: string
+          format: email
+        fullname:
+          type: string
+        mobileNumber:
+          type: string
+        isEmailVerified:
+          type: boolean
+        isMobileNumberVerified:
+          type: boolean
+    AuthPayload:
+      type: object
+      properties:
+        id:
+          type: string
+        role:
+          type: string
+        email:
+          type: string
+          format: email
+        name:
+          type: string

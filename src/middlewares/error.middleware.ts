@@ -2,8 +2,8 @@ import { Request, Response, NextFunction } from "express";
 import httpStatus from "http-status";
 import { Error as MongooseError } from "mongoose";
 
-import { AppConfig, Logger } from "@/config";
-import { ApiError } from "@/utils";
+import { AppConfig } from "@/config";
+import { ApiError, printError } from "@/utils";
 
 type ErrorResponse = {
   success: boolean;
@@ -39,12 +39,7 @@ const errorHandler = (err: ApiError, req: Request, res: Response, _next: NextFun
   }
 
   res.locals.errorMessage = err.message;
-  Logger.error("============================== Error ==============================");
-  Logger.info(`Query: ${JSON.stringify(req.query)}`);
-  Logger.info(`Params: ${JSON.stringify(req.params)}`);
-  Logger.info(`Body: ${JSON.stringify(req.body)}\n`);
-  Logger.info(`${err.stack}\n`);
-  Logger.error("============================== XXXXXX ==============================");
+  printError(req, err);
   res.status(statusCode).send(response);
 };
 

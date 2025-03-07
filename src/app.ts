@@ -46,7 +46,6 @@ app.use("/api/v1", v1AppRoutes);
 
 // send back a 404 error for any unknown api request
 app.use((_req, _res, next) => {
-  console.log("Inside 404!");
   next(new ApiError(httpStatus.NOT_FOUND, httpStatus[httpStatus.NOT_FOUND]));
 });
 

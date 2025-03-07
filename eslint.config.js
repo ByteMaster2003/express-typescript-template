@@ -1,6 +1,5 @@
 import pluginJs from "@eslint/js";
 import eslintParser from "@typescript-eslint/parser";
-import airbnbBase from "eslint-config-airbnb-base";
 import configPrettier from "eslint-config-prettier";
 import pluginImport from "eslint-plugin-import";
 import pluginJest from "eslint-plugin-jest";
@@ -36,7 +35,6 @@ export default [
     },
     rules: {
       // Base rules
-      ...airbnbBase.rules,
       ...configPrettier.rules,
 
       // JsDoc configs
@@ -78,12 +76,15 @@ export default [
       "no-console": ["warn", { allow: ["warn", "error"] }],
       "security/detect-object-injection": "off",
 
-      '@typescript-eslint/no-unused-vars': ['error', { 
-        argsIgnorePattern: '^_',
-        varsIgnorePattern: '^_',
-        caughtErrorsIgnorePattern: '^_'
-      }],
-      'no-unused-vars': 'off',
+      "@typescript-eslint/no-unused-vars": [
+        "error",
+        {
+          argsIgnorePattern: "^_",
+          varsIgnorePattern: "^_",
+          caughtErrorsIgnorePattern: "^_"
+        }
+      ],
+      "no-unused-vars": "off",
 
       // Other rules
       "no-unused-expressions": "error",

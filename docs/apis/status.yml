@@ -1,0 +1,30 @@
+/auth/status:
+  get:
+    summary: Check User session status
+    description: If User has valid token then will return the payload
+    tags:
+      - Authentication
+    security:
+      - bearerAuth: []
+    responses:
+      200:
+        description: Login successful
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                success:
+                  type: boolean
+                  example: true
+                message:
+                  type: string
+                  example: "Auth Is Valid."
+                user:
+                  $ref: "#/components/schemas/AuthPayload"
+      401:
+        $ref: "#/components/responses/Unauthorized"
+      429:
+        $ref: "#/components/responses/RateLimitExceed"
+      500:
+        $ref: "#/components/responses/ServerError"

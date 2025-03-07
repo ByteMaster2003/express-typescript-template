@@ -7,7 +7,7 @@ import { catchAsync, ApiError, tokenUtil } from "@/utils";
 const authMiddleware = catchAsync(async (req, res, next) => {
   // Get Access Token
   const accessToken: string | null | undefined = req.headers.authorization
-    ? req.headers.authorization
+    ? req.headers.authorization.split(" ")[1]
     : req.cookies.accessToken;
 
   // Get Refresh Token
@@ -17,13 +17,13 @@ const authMiddleware = catchAsync(async (req, res, next) => {
 
   // If no token then throw error
   if (!accessToken && !refreshToken) {
-    throw new ApiError(httpStatus.UNAUTHORIZED, httpStatus[httpStatus.UNAUTHORIZED]);
+    throw new ApiError(httpStatus.UNAUTHORIZED, "Authentication Required!");
   } else if (!accessToken && refreshToken) {
     const payload = tokenUtil.verifyRefreshToken(refreshToken);
     const userId = payload.id;
 
     if (!userId) {
-      throw new ApiError(httpStatus.UNAUTHORIZED, httpStatus[httpStatus.UNAUTHORIZED]);
+      throw new ApiError(httpStatus.UNAUTHORIZED, "Authentication Required!");
     }
     const user = await userService.getUserById(userId);
     const authPayload = {

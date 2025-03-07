@@ -137,7 +137,7 @@ export const statusHandler = catchAsync(async (req: Request, res: Response): Pro
       id: auth.id,
       role: auth.role,
       email: auth.email,
-      name: auth.fullname
+      name: auth.name
     }
   });
 });
